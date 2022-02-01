@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CoronaBot</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://dl.dropbox.com/s/etgauu5uurbcg1v/chatstyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <section class="msger">
+    <header class="msger-header">
+      <div class="msger-header-title"><i class="fas fa-bug"></i> DoorBot <i class="fas fa-bug"></i></div>
+    </header>
+
+    <main class="msger-chat">
+      <div class="msg left-msg">
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">DoorBot</div>
+            <div class="msg-info-time" id="date"></div>
+            </div>
+            <div id="final">{{response}}</div>           
+        </div>
+      </div>
+    </main>   
+   
+    <form method = "POST" class="msger-inputarea" id="new_chat"> 
+    {%  csrf_token %}
+      <input id="your_name" type="text" name="your_name" class="msger-input" placeholder="Enter your message...">    
+      <button type="submit"  class="msger-send-btn" >Send</button>
+    </form>
+  </section>
+   
+  <script>
+    const BOT_NAME = "Navigator";
+    const PERSON_NAME = "User";
+    const msgerForm = get(".msger-inputarea");
+    const msgerInput = get(".msger-input");
+    const msgerChat = get(".msger-chat");
+
+    $(document).on('submit','#new_chat',function(e){
+        e.preventDefault();
+                $.ajax({                
+                type:"GET",
+                url:'chat',
+                data: {
+                    res : $("#your_name").val()
+                },
+                success:function(data){
+                  var result = $('<div />').append(data).find('#final').html();
+                  $('#final').html(result);
+                  console.log(result);
+                  console.log("Success");
+                  response();
+                  var msgresponse=document.getElementById("final").innerHTML;
+                  console.log(msgresponse);
+                  botResponse(msgresponse);                 
+               }
+        });
+    });
+
+    function response(){
+      const msgText = msgerInput.value;
+      if (!msgText) return;
+      appendMessage(PERSON_NAME, "right", msgText);
+    }
+ 
+    function appendMessage(name, side, text){
+      const msgHTML = 
+      `
+      <div class="msg ${side}-msg">
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">${name}</div>
+          </div>
+          <div class="msg-text">${text}</div>
+        </div>
+      </div>`;
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+    }
+
+    function appendExit(name,side, text){
+      const msgHTML = `
+      <div class="msg ${side}-msg">
+
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name">${name}</div>
+          </div>
+          <div class="msg-text"><a class="btn btn-danger" href="{% url 'dashboard' %}" role="button">QUIT</a></div>
+        </div>
+      </div>
+      `;
+
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+    }
+
+    function botResponse(msgresponse){       
+      appendMessage(BOT_NAME, "left", msgresponse);
+      document.getElementById("final").innerHTML="MY name is Flash. What is your name";
+      document.getElementById("your_name").value="";
+      if (msgresponse=== "Bye take care"){
+        appendExit(BOT_NAME,"left", "QUIT");
+      }        
+    }
+
+    function get(selector, root = document){
+      return root.querySelector(selector);
+    }   
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DASHBOARD</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://dl.dropbox.com/s/shtnmtafeg5ihrj/stylemain.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div id="dismiss">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="sidebar-header" style="text-align: center;">
+                <h4>SMART DOOR LOCK</h4>
+            </div>
+
+            <ul id="nav-list">
+                <li class="active"><a class="nav-item" href="#">Dashboard</a></li>
+                <li><a class="nav-item" href="{% url 'logs' %}">Logs</a></li>
+                <li><a class="nav-item" href="{% url 'form' %}">Add Member</a></li>
+                <li><a class="nav-item" href="{% url 'verify_otp' %}">Unlock Access</a></li>
+                <li><a class="nav-item" href="{% url 'chat' %}">Chatbot Simulation</a></li>
+            </ul>
+
+            <ul class="list-unstyled logout">
+                <li><a href="{% url 'logout' %}" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color: #4e73df;">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <button id="btn1" class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">{{request.user}}</button>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active"><a class="nav-link" href="#">admin</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" id="navbarSupportedContent">
+                        <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</a>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+    <div class="overlay"></div>
+</body>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" crossorigin="anonymous"></script>
+    <script src="{% static 'smart_lock/js/sidebar.js' %}"></script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RESTRICTED</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
+</head>
+
+<style>
+    @media (max-width:768px){
+        #msg{
+            padding: 50% 30px 30px;
+        }
+    }
+    @media (min-width: 770px){
+        #msg{
+            padding: 15% 5% 5%;
+        }
+    }
+</style>
+
+<body>
+    <div class="container-fluid" id="msg">
+        <div class="col-lg-6 col-xl-6 offset-xl-3 col-sm-4">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h3 class="text-primary font-weight-bold m-0 text-danger" style="text-align: center;">RESTRICTED</h3>
+                </div>
+                <div class="card-body text-center">
+                    <h5>Sorry!<br>You cannot access this webpage</h5>
+                    <button class="btn btn-dark" onclick="goBack()">GO BACK</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" crossorigin="anonymous"></script>
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>
+</html>

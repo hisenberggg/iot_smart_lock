@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://dl.dropbox.com/s/7svgmkukgogzeoz/style.css">
+    <title>::LOGIN::</title>
+  </head>
+
+  <style>
+    body{
+        background-color: #1A1A1A;
+        background-size: 100vw 100vh;
+    }
+  </style>
+  <body>
+    <div class="d-flex justify-content-end pt-3 pr-3">
+      <a href="/" class="btn btn-success text-white" role="button">Go Back</a>
+    </div>
+    <!--LOGIN CARD-->
+    <div class="container" id="login_bg" style = "padding-top: 2%">
+      <div class="row justify-content-center">
+        <div class="col-md-9 col-lg-12 col-xl-10">
+          <div class="card shadow-lg 0-hidden border-0 my-5" style="border-radius: 20px;">
+            <div class="card-body p-0" style="border-radius: 250px;">
+              <div class="row">
+                <div class="col-lg-6 d-none d-lg-flex">
+                  <div class="flex-grow-1 bg-login-image">
+                    <img src="https://dl.dropbox.com/s/etlltgqubddtnwr/secure.jpg" style="width: 100%;border-radius: 20px;">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="p-4">
+                    <div class="text-center"><br><br>
+                      <h3 class="text-dark mb-4">LOGIN</h3>
+                    </div><br><br>
+                    <form class="user" method="POST" action="">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        <input class="form-control form-control-user" type="text" name="username" placeholder="Enter Username">
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control form-control-user" type="password" name="password" placeholder="Enter Password">
+                      </div>
+                      <button class="btn btn-primary btn-block text-white btn-user" type="submit">Login</button>
+                    </form>
+                    <br>
+                    {% if messages %}
+                        {% for message in messages %}
+                          <h6 class="{{ message.tags }}" style="text-align: center; color: red" >{{ message }}</h6>
+                        {% endfor %}
+                    {% endif %}
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer" class="card-footer bg-dark text-white"><p>© 2020 Designed by Amish, Abhijeet, Kshitij</p></div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+</html>

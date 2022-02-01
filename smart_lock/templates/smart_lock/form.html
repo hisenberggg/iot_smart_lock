@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'smart_lock/css/stylemain.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div id="dismiss">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+            <div class="sidebar-header" style="text-align: center;">
+                <h4>IoT Project</h4>
+            </div>
+            <ul id="nav-list">
+                <li><a class="nav-item" href="dashboard">Dashboard</a></li>
+                <li><a class="nav-item" href="logs">Logs</a></li>
+                <li class="active"><a class="nav-item" href="#">Add Member</a></li>
+                <li><a class="nav-item" href="verify_otp">Unlock Access</a></li>
+                <li><a class="nav-item" href="chat">Chatbot Simulation</a></li>
+            </ul>
+
+            <ul class="list-unstyled logout">
+                <li><a href="{% url 'logout' %}" id="logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color: #4e73df;">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <button id="btn1" class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">{{request.user}}</button>
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active"><a class="nav-link" href="#">{{request.user}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" id="navbarSupportedContent">
+                        <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4 text-center"> Add Member</h3>
+                <div class="d-sm-flex justify-content-between align-items-center mb-4"></div>
+                <div class="row">
+                    <div class="col-lg-6 offset-lg-3">
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <form id="registration" method="POST">
+                                  {% csrf_token %}
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="name">Full Name</label>
+                                                <input id="name" class="form-control" type="text" name="first_name" placeholder=" Enter Name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="username">Username</label>
+                                                <input id="user"class="form-control user1" type="text" id="pswd1" name="username" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="pswd">Password</label>
+                                                <input class="form-control" type="password" id="pswd" name="password1" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="access_level">Access Level</label>
+                                                <select class="form-control" id="access_level" form="registration" name="access_level" required>
+                                                    <option>ADMIN</option>
+                                                    <option>VIEW_UNLOCK</option>
+                                                    <option>VIEW</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" onclick="myFunction()" class="btn btn-primary">Register</button>
+                                </form><br>
+                                {% if messages %}
+                                    <ul class="messages list-unstyled">
+                                        {% for message in messages %}
+                                        {% if message.tags %} <li class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay"></div>
+</body>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" crossorigin="anonymous"></script>
+    <script src="{% static 'smart_lock/js/sidebar.js' %}"></script>
+</html>
